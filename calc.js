@@ -1,0 +1,13 @@
+
+
+
+function calculate() {
+  
+
+}
+
+
+function checker() {
+
+
+}

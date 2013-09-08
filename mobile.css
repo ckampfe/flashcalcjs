@@ -1,0 +1,65 @@
+/* debug wildcard */
+* {
+  border: 2px dotted pink;
+}
+
+
+body {
+  width: 90%;
+  height: 90%;
+  margin-top: 7%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: monospace, sans-serif;
+}
+
+/* 
+ 
+Input stuff!
+
+*/ 
+
+#inputlist {
+  list-style: none;
+  min-height: 50%;
+  vertical-align: middle;
+  margin-top: 25%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* includes description */
+li {
+  vertical-align: middle;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5%;
+  margin-top: 9px;
+  margin-bottom: 4px;
+}
+
+.desc {
+  display: none;
+}
+
+/* just the box */
+input {
+  margin-left: 5%;
+  margin-right: 5%;
+  vertical-align: middle;
+  width: 90%;
+  /*float: right;*/
+  /*padding: 3px;*/
+  color: #828282;
+  font-family: monospace, sans-serif;
+  font-size: 1.6em;
+  /*margin-bottom: 14px;*/
+}
+
+/* header */ 
+#mast {
+  float: right;
+  font-size: 1.4em;
+
+}
