@@ -1,8 +1,16 @@
-
-
-
-function calculate() {
+function calculateAperture(gn, iso, flashPower, distance) {
   
+}
+
+function calculateDistance(gn, aperture, iso, flashPower) {
+
+}
+
+function calculateFlashPower(gn, aperture, iso, distance) {
+
+}
+
+function calculateISO(gn, aperture, flashPower, distance) {
 
 }
 
@@ -13,14 +21,14 @@ function checker() {
   var iso = document.getElementById('isoinput').value; 
   var gn = document.getElementById('gninput').value;
 
-  // elements is an array containing all of the values that are not GN
-  var elements = document.getElementsByName('notgn');
-
   // write the variable to the specified id. 
   document.getElementById("apvalue").innerHTML = ap;
   document.getElementById("isovalue").innerHTML = iso; 
   document.getElementById("gnvalue").innerHTML = gn;
   
+  // elements is an array containing all of the values that are not GN
+  var elements = document.getElementsByName('notgn');
+
   // base text variable
   var textyText = "";
   
