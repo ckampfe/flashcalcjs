@@ -1,27 +1,33 @@
 /* easier to do logs with a base of SQRT2
 via this post: http://stackoverflow.com/questions/3019278/any-way-to-specify-the-base-of-math-log-in-javascript */
 function logSqrt2(val) {
-  return Math.log(val) / Math.log(Math.SQRT2)
+  return Math.log(val) / Math.log(Math.SQRT2);
 }
 
-// should work
+// log base two
+function logBase2(val) {
+  return Math.log(val) / Math.log(2);
+}
+
+// confirmed working, output is similar to Ruby version
 function calculateAperture(gn, iso, flashPower, distance) {
-  var isoMod = -(Math.log(iso/100.0,2))
-  var fpMod = Math.log(Math.pow(flashPower, -1.0)) 
+  var isoMod = logBase2(iso/100);
+  var fpMod = -(logBase2(Math.pow(flashPower, -1)));
   
-  var ev = Math.pow(Math.SQRT2, (isoMod + fpMod)) 
-  var ap = ((gn / dist) * ev)
+  var ev = Math.pow(Math.SQRT2, (isoMod + fpMod));
+  // kludgy javascript rounding
+  var ap = Math.round(((gn / distance) * ev) * 100) / 100;
   return ap
 }
 
-// should work
+// confirmed working, output is similar to Ruby version
 function calculateDistance(gn, aperture, iso, flashPower) {
-  var isoMod = -(Math.log(iso/100.0,2))
-  var fpMod = Math.log(Math.pow(flashPower, -1.0)) 
-  var apMod = logSqrt2(aperture)
+  var isoMod = -(logBase2(iso/100.0, 2));
+  var fpMod = logBase2(Math.pow(flashPower, -1.0));
+  var apMod = logSqrt2(aperture);
 
-  var ev = Math.pow(Math.SQRT2, (isoMod + apMod + fpMod))
-  var dist = gn / ev
+  var ev = Math.pow(Math.SQRT2, (isoMod + apMod + fpMod));
+  var dist = Math.round(gn / ev);
   return dist
 }
 
@@ -30,6 +36,7 @@ function calculateDistance(gn, aperture, iso, flashPower) {
 function calculateFlashPower(gn, aperture, iso, distance) {
   var iso_mod = -(Math.log(iso/100.0,2))
   var apMod = logSqrt2(aperture)
+
   
    
 }
