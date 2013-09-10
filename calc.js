@@ -4,6 +4,7 @@ function logSqrt2(val) {
   return Math.log(val) / Math.log(Math.SQRT2)
 }
 
+// should work
 function calculateAperture(gn, iso, flashPower, distance) {
   var isoMod = -(Math.log(iso/100.0,2))
   var fpMod = Math.log(Math.pow(flashPower, -1.0)) 
@@ -13,6 +14,7 @@ function calculateAperture(gn, iso, flashPower, distance) {
   return ap
 }
 
+// should work
 function calculateDistance(gn, aperture, iso, flashPower) {
   var isoMod = -(Math.log(iso/100.0,2))
   var fpMod = Math.log(Math.pow(flashPower, -1.0)) 
@@ -23,13 +25,20 @@ function calculateDistance(gn, aperture, iso, flashPower) {
   return dist
 }
 
+// not yet working
+// needs logic to throw exception if fp is larger than 1
 function calculateFlashPower(gn, aperture, iso, distance) {
   var iso_mod = -(Math.log(iso/100.0,2))
+  var apMod = logSqrt2(aperture)
   
+   
 }
 
+// not yet working
+// maybe logic to round to the nearest 1/3 stop?
 function calculateISO(gn, aperture, flashPower, distance) {
   var fpMod = Math.log(Math.pow(flashPower, -1.0)) 
+  var apMod = logSqrt2(aperture)
 
 }
 
