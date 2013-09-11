@@ -45,9 +45,13 @@ function calculateFlashPower(gn, aperture, iso, dist) {
 // not yet working
 // maybe logic to round to the nearest 1/3 stop?
 function calculateISO(gn, aperture, flashPower, dist) {
-  var fpMod = Math.log(Math.pow(flashPower, -1.0)) 
-  var apMod = logSqrt2(aperture)
-
+  var fpMod = logBase2(Math.pow(flashPower, -1.0)); 
+  var apMod = logSqrt2(aperture);
+  
+  var isoMod = -(logSqrt2(gn / dist)) + (fpMod + apMod);
+  var iso = Math.pow(2, isoMod) * 100 
+ 
+  return iso
 }
 
 // EXPERIMENTING TO GET FAMILIAR
