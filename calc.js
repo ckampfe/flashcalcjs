@@ -10,40 +10,41 @@ function logBase2(val) {
 }
 
 // confirmed working, output is similar to Ruby version
-function calculateAperture(gn, iso, flashPower, distance) {
+function calculateAperture(gn, iso, flashPower, dist) {
   var isoMod = logBase2(iso/100);
   var fpMod = -(logBase2(Math.pow(flashPower, -1)));
   
   var ev = Math.pow(Math.SQRT2, (isoMod + fpMod));
-  // kludgy javascript rounding
-  var ap = Math.round(((gn / distance) * ev) * 100) / 100;
-  return ap
+  var ap = Math.round(((gn / dist) * ev) * 100) / 100;
+  return ap;
 }
 
 // confirmed working, output is similar to Ruby version
 function calculateDistance(gn, aperture, iso, flashPower) {
-  var isoMod = -(logBase2(iso/100.0, 2));
+  var isoMod = -(logBase2(iso/100.0));
   var fpMod = logBase2(Math.pow(flashPower, -1.0));
   var apMod = logSqrt2(aperture);
 
   var ev = Math.pow(Math.SQRT2, (isoMod + apMod + fpMod));
   var dist = Math.round(gn / ev);
-  return dist
+  return dist;
 }
 
-// not yet working
+// apparently working, needs more tests and rounding
 // needs logic to throw exception if fp is larger than 1
-function calculateFlashPower(gn, aperture, iso, distance) {
-  var iso_mod = -(Math.log(iso/100.0,2))
-  var apMod = logSqrt2(aperture)
+function calculateFlashPower(gn, aperture, iso, dist) {
+  var isoMod = -(logBase2(iso/100.0));
+  var apMod = logSqrt2(aperture);
 
+  var fpMod = -(logSqrt2(gn / dist) - (isoMod + apMod));
+  var flashPower = Math.pow(2, fpMod);
   
-   
+  return flashPower;
 }
 
 // not yet working
 // maybe logic to round to the nearest 1/3 stop?
-function calculateISO(gn, aperture, flashPower, distance) {
+function calculateISO(gn, aperture, flashPower, dist) {
   var fpMod = Math.log(Math.pow(flashPower, -1.0)) 
   var apMod = logSqrt2(aperture)
 
