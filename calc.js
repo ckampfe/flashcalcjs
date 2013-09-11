@@ -31,7 +31,7 @@ function calculateDistance(gn, aperture, iso, flashPower) {
 }
 
 // apparently working, needs more tests and rounding
-// needs logic to throw exception if fp is larger than 1
+// needs logic to throw error if fp is larger than 1
 function calculateFlashPower(gn, aperture, iso, dist) {
   var isoMod = -(logBase2(iso/100.0));
   var apMod = logSqrt2(aperture);
