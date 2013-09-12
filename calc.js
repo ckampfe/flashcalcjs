@@ -1,10 +1,33 @@
-/* easier to do logs with a base of SQRT2
-via this post: http://stackoverflow.com/questions/3019278/any-way-to-specify-the-base-of-math-log-in-javascript */
+function checker() {
+  // vars are equal to the value in the form field
+  var gn = document.getElementById('gninput').value,
+  ap = document.getElementById('apinput').value,
+  iso = document.getElementById('isoinput').value, 
+  dist = document.getElementById('distinput').value;
+
+  
+  // elements is an array containing all of the values that are not GN
+  var elements = document.getElementsByName('notgn');
+
+  // base text variable
+  var textyText = "";
+  
+  // loop to put each element of the non-gns array in a string, within newline separation
+  for ( i = 0; i < elements.length; i++ ) {
+    textyText += (elements[i].id + ": " + elements[i].value + "<br />");
+  } 
+  
+  // write textyText (formerly an array, now a newline separated string) to the testing nongns id element 
+  document.getElementById("nongns").innerHTML = textyText
+}
+
+
+
+
 function logSqrt2(val) {
   return Math.log(val) / Math.log(Math.SQRT2);
 }
 
-// log base two
 function logBase2(val) {
   return Math.log(val) / Math.log(2);
 }
@@ -53,32 +76,3 @@ function calculateISO(gn, aperture, flashPower, dist) {
  
   return iso
 }
-
-// EXPERIMENTING TO GET FAMILIAR
-function checker() {
-  // vars are equal to the value in the form field
-  var ap = document.getElementById('apinput').value;
-  var iso = document.getElementById('isoinput').value; 
-  var gn = document.getElementById('gninput').value;
-
-  // write the variable to the specified id. 
-  document.getElementById("apvalue").innerHTML = ap;
-  document.getElementById("isovalue").innerHTML = iso; 
-  document.getElementById("gnvalue").innerHTML = gn;
-  
-  // elements is an array containing all of the values that are not GN
-  var elements = document.getElementsByName('notgn');
-
-  // base text variable
-  var textyText = "";
-  
-  // loop to put each element of the non-gns array in a string, within newline separation
-  for(i=0; i<elements.length; i++) {
-    textyText += (elements[i].id + ": " + elements[i].value + "<br />");
-  } 
-  
-  // write textyText (formerly an array, now a newline separated string) to the testing nongns id element 
-  document.getElementById("nongns").innerHTML = textyText
-}
-
-checker()
