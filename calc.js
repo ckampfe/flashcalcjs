@@ -7,12 +7,8 @@ function control() {
   // reset the result/error line
   outputWriter("");
 
-  // get the value of each field
-  var gn = document.getElementById('gninput').value,
-  ap = document.getElementById('apinput').value,
-  iso = document.getElementById('isoinput').value, 
-  fp = eval(document.getElementById('fpinput').value),
-  dist = document.getElementById('distinput').value;
+  // get the value of GN 
+  var gn = document.getElementById('gninput').value;
 
   // error if no GN
   if ( !gn ) {
@@ -20,6 +16,12 @@ function control() {
     console.log("Error: please enter a Guide Number.");
     return;
   }
+
+  // get the other values, if GN passes
+  var ap = document.getElementById('apinput').value,
+  iso = document.getElementById('isoinput').value, 
+  fp = eval(document.getElementById('fpinput').value),
+  dist = document.getElementById('distinput').value;
 
   // checks to see that exactly 1 non-Guide Number field is left blank 
   if ( (!ap && (!iso || !fp || !dist)) || (!iso && (!fp || !dist)) || (!fp && !dist) || (ap && iso && fp && dist) ) {
@@ -42,7 +44,7 @@ function control() {
 
 // HELPERS
 
-// write results
+// write results to page
 function outputWriter(value) {
   document.getElementById('result').innerHTML = value;
 }
@@ -85,7 +87,9 @@ function calculateFlashPower(gn, aperture, iso, dist) {
 
   var fpMod = -(logSqrt2(gn / dist) - (isoMod + apMod)),
   flashPower = Math.pow(2, fpMod);
-  
+
+  // needs error if flashPower is greater than 1; "you broke physics!", or something similar
+
   return flashPower;
 }
 
