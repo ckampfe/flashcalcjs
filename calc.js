@@ -28,9 +28,7 @@ function checker() {
   }
 }
 
-
-
-
+// these two are necessary for converting specific inputs into raw EV stops. 
 function logSqrt2(val) {
   return Math.log(val) / Math.log(Math.SQRT2);
 }
@@ -39,7 +37,7 @@ function logBase2(val) {
   return Math.log(val) / Math.log(2);
 }
 
-// confirmed working, output is similar to Ruby version
+// four exposure calculations
 function calculateAperture(gn, iso, flashPower, dist) {
   var isoMod = logBase2(iso/100);
   var fpMod = -(logBase2(Math.pow(flashPower, -1)));
@@ -49,7 +47,6 @@ function calculateAperture(gn, iso, flashPower, dist) {
   return ap;
 }
 
-// confirmed working, output is similar to Ruby version
 function calculateDistance(gn, aperture, iso, flashPower) {
   var isoMod = -(logBase2(iso/100.0));
   var fpMod = logBase2(Math.pow(flashPower, -1.0));
@@ -60,8 +57,6 @@ function calculateDistance(gn, aperture, iso, flashPower) {
   return dist;
 }
 
-// apparently working, needs more tests and rounding
-// needs logic to throw error if fp is larger than 1
 function calculateFlashPower(gn, aperture, iso, dist) {
   var isoMod = -(logBase2(iso/100.0));
   var apMod = logSqrt2(aperture);
@@ -72,8 +67,6 @@ function calculateFlashPower(gn, aperture, iso, dist) {
   return flashPower;
 }
 
-// not yet working
-// maybe logic to round to the nearest 1/3 stop?
 function calculateISO(gn, aperture, flashPower, dist) {
   var fpMod = logBase2(Math.pow(flashPower, -1.0)); 
   var apMod = logSqrt2(aperture);
