@@ -1,24 +1,31 @@
+document.getElementById("calcbutton").onclick = checker;
+
 function checker() {
-  // vars are equal to the value in the form field
+  
+  // reset the result/error line
+  document.getElementById('result').innerHTML = ""
+
+  // get the value of each field
   var gn = document.getElementById('gninput').value,
   ap = document.getElementById('apinput').value,
   iso = document.getElementById('isoinput').value, 
+  fp = document.getElementById('fpinput').value,
   dist = document.getElementById('distinput').value;
 
-  
-  // elements is an array containing all of the values that are not GN
-  var elements = document.getElementsByName('notgn');
+  // error if no GN
+  if ( !gn ) {
+    console.log("Error: please enter a Guide Number.");
+    document.getElementById('result').innerHTML = "Error: please enter a Guide Number.";
+    return;
+  }
 
-  // base text variable
-  var textyText = "";
-  
-  // loop to put each element of the non-gns array in a string, within newline separation
-  for ( i = 0; i < elements.length; i++ ) {
-    textyText += (elements[i].id + ": " + elements[i].value + "<br />");
-  } 
-  
-  // write textyText (formerly an array, now a newline separated string) to the testing nongns id element 
-  document.getElementById("nongns").innerHTML = textyText
+  // checks to see that exactly 1 non-Guide Number field is left blank 
+  // seems to work, will test more
+  if ( (!ap && (!iso || !fp || !dist)) || (!iso && (!fp || !dist)) || (!fp && !dist) || (ap && iso && fp && dist) ) {
+    console.log("Error: please leave only one field blank.");
+    document.getElementById('result').innerHTML = "Error: please leave exactly one field blank, not including Guide Number.";
+    return;
+  }
 }
 
 
