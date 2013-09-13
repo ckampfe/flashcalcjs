@@ -9,14 +9,14 @@ function checker() {
   var gn = document.getElementById('gninput').value,
   ap = document.getElementById('apinput').value,
   iso = document.getElementById('isoinput').value, 
-  fp = document.getElementById('fpinput').value,
+  fp = eval(document.getElementById('fpinput').value),
   dist = document.getElementById('distinput').value;
 
   // error if no GN
   if ( !gn ) {
     outputWriter("Error: please enter a Guide Number.");
     console.log("Error: please enter a Guide Number.");
-    return 0;
+    return;
   }
 
   // checks to see that exactly 1 non-Guide Number field is left blank 
@@ -24,7 +24,7 @@ function checker() {
   if ( (!ap && (!iso || !fp || !dist)) || (!iso && (!fp || !dist)) || (!fp && !dist) || (ap && iso && fp && dist) ) {
     console.log("Error: please leave only one field blank.");
     outputWriter("Error: please leave exactly one field blank, not including Guide Number.");
-    return 0;
+    return;
   } else if ( !ap ) {
     calculateAperture(gn, iso, fp, dist);
   } else if ( !dist ) {
