@@ -39,40 +39,42 @@ function logBase2(val) {
 
 // four exposure calculations
 function calculateAperture(gn, iso, flashPower, dist) {
-  var isoMod = logBase2(iso/100);
-  var fpMod = -(logBase2(Math.pow(flashPower, -1)));
+  var isoMod = logBase2(iso/100),
+  fpMod = -(logBase2(Math.pow(flashPower, -1)));
   
-  var ev = Math.pow(Math.SQRT2, (isoMod + fpMod));
-  var ap = Math.round(((gn / dist) * ev) * 100) / 100;
+  var ev = Math.pow(Math.SQRT2, (isoMod + fpMod)),
+  ap = Math.round(((gn / dist) * ev) * 100) / 100;
+
   return ap;
 }
 
 function calculateDistance(gn, aperture, iso, flashPower) {
-  var isoMod = -(logBase2(iso/100.0));
-  var fpMod = logBase2(Math.pow(flashPower, -1.0));
-  var apMod = logSqrt2(aperture);
+  var isoMod = -(logBase2(iso/100.0)),
+  fpMod = logBase2(Math.pow(flashPower, -1.0)),
+  apMod = logSqrt2(aperture);
 
-  var ev = Math.pow(Math.SQRT2, (isoMod + apMod + fpMod));
-  var dist = Math.round(gn / ev);
+  var ev = Math.pow(Math.SQRT2, (isoMod + apMod + fpMod)),
+  dist = Math.round(gn / ev);
+
   return dist;
 }
 
 function calculateFlashPower(gn, aperture, iso, dist) {
-  var isoMod = -(logBase2(iso/100.0));
-  var apMod = logSqrt2(aperture);
+  var isoMod = -(logBase2(iso/100.0)),
+  apMod = logSqrt2(aperture);
 
-  var fpMod = -(logSqrt2(gn / dist) - (isoMod + apMod));
-  var flashPower = Math.pow(2, fpMod);
+  var fpMod = -(logSqrt2(gn / dist) - (isoMod + apMod)),
+  flashPower = Math.pow(2, fpMod);
   
   return flashPower;
 }
 
 function calculateISO(gn, aperture, flashPower, dist) {
-  var fpMod = logBase2(Math.pow(flashPower, -1.0)); 
-  var apMod = logSqrt2(aperture);
+  var fpMod = logBase2(Math.pow(flashPower, -1.0)), 
+  apMod = logSqrt2(aperture);
   
-  var isoMod = -(logSqrt2(gn / dist)) + (fpMod + apMod);
-  var iso = Math.pow(2, isoMod) * 100 
+  var isoMod = -(logSqrt2(gn / dist)) + (fpMod + apMod),
+  iso = Math.pow(2, isoMod) * 100; 
  
-  return iso
+  return iso;
 }
