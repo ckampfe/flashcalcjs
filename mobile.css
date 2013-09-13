@@ -39,6 +39,10 @@ li {
   margin-bottom: 4px;
 }
 
+#result {
+  margin-bottom: 5%;
+}
+
 .desc {
   display: none;
 }
