@@ -1,6 +1,8 @@
-document.getElementById("calcbutton").onclick = checker;
+document.getElementById("calcbutton").onclick = control;
 
-function checker() {
+// CONTROL LOGIC
+
+function control() {
   
   // reset the result/error line
   outputWriter("");
@@ -20,24 +22,27 @@ function checker() {
   }
 
   // checks to see that exactly 1 non-Guide Number field is left blank 
-  // seems to work, will test more
   if ( (!ap && (!iso || !fp || !dist)) || (!iso && (!fp || !dist)) || (!fp && !dist) || (ap && iso && fp && dist) ) {
     console.log("Error: please leave only one field blank.");
     outputWriter("Error: please leave exactly one field blank, not including Guide Number.");
     return;
   } else if ( !ap ) {
-    calculateAperture(gn, iso, fp, dist);
+    outputWriter(calculateAperture(gn, iso, fp, dist));
   } else if ( !dist ) {
-    calculateDistance(gn, ap, iso, fp);
+    outputWriter(calculateDistance(gn, ap, iso, fp));
   } else if ( !fp ) {
-    calculateFlashPower(gn, ap, iso, dist); 
+    outputWriter(calculateFlashPower(gn, ap, iso, dist));
   } else if ( !iso ) {
-    calculateISO(gn, ap, fp, dist);
+    outputWriter(calculateISO(gn, ap, fp, dist));
   } else {
+    outputWriter("Unknown error occurred; please try again.");
     console.log("Unknown error occurred in calculate method.");
   }
 }
 
+// HELPERS
+
+// write results
 function outputWriter(value) {
   document.getElementById('result').innerHTML = value;
 }
@@ -51,8 +56,8 @@ function logBase2(val) {
   return Math.log(val) / Math.log(2);
 }
 
+// MATH
 
-// four exposure calculations
 function calculateAperture(gn, iso, flashPower, dist) {
   var isoMod = logBase2(iso/100),
   fpMod = -(logBase2(Math.pow(flashPower, -1)));
@@ -60,7 +65,7 @@ function calculateAperture(gn, iso, flashPower, dist) {
   var ev = Math.pow(Math.SQRT2, (isoMod + fpMod)),
   ap = Math.round(((gn / dist) * ev) * 100) / 100;
 
-  outputWriter(ap);
+  return ap;
 }
 
 function calculateDistance(gn, aperture, iso, flashPower) {
@@ -71,7 +76,7 @@ function calculateDistance(gn, aperture, iso, flashPower) {
   var ev = Math.pow(Math.SQRT2, (isoMod + apMod + fpMod)),
   dist = Math.round(gn / ev);
 
-  outputWriter(dist);
+  return dist;
 }
 
 function calculateFlashPower(gn, aperture, iso, dist) {
@@ -81,7 +86,7 @@ function calculateFlashPower(gn, aperture, iso, dist) {
   var fpMod = -(logSqrt2(gn / dist) - (isoMod + apMod)),
   flashPower = Math.pow(2, fpMod);
   
-  outputWriter(flashPower);
+  return flashPower;
 }
 
 function calculateISO(gn, aperture, flashPower, dist) {
@@ -91,5 +96,5 @@ function calculateISO(gn, aperture, flashPower, dist) {
   var isoMod = -(logSqrt2(gn / dist)) + (fpMod + apMod),
   iso = Math.pow(2, isoMod) * 100; 
   
-  outputWriter(iso);
+  return iso;
 }
