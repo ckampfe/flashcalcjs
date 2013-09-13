@@ -1,11 +1,12 @@
 document.getElementById("calcbutton").onclick = control;
+outputWriter("<br />");
 
 // CONTROL LOGIC
 
 function control() {
   
   // reset the result/error line
-  outputWriter("");
+  outputWriter("<br />");
 
   // get the value of GN 
   var gn = document.getElementById('gninput').value;
@@ -26,7 +27,7 @@ function control() {
   // checks to see that exactly 1 non-Guide Number field is left blank 
   if ( (!ap && (!iso || !fp || !dist)) || (!iso && (!fp || !dist)) || (!fp && !dist) || (ap && iso && fp && dist) ) {
     console.log("Error: please leave only one field blank.");
-    outputWriter("Error: please leave exactly one field blank, not including Guide Number.");
+    outputWriter("Error: please leave exactly one non-GN field blank.");
     return;
   } else if ( !ap ) {
     outputWriter(calculateAperture(gn, iso, fp, dist));
