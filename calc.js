@@ -37,10 +37,10 @@ function control() {
     outputWriter(Math.round(calculateDistance(gn, ap, iso, fp)) + " ft.");
   } else if ( !fp ) {
     // round to hundredths 
-    outputWriter("FP = " + Math.round(calculateFlashPower(gn, ap, iso, dist) * 100) / 100);
+    outputWriter("FP " + Math.round(calculateFlashPower(gn, ap, iso, dist) * 100) / 100);
   } else if ( !iso ) {
-    // round to nearest integer
-    outputWriter("ISO = " + Math.round(calculateISO(gn, ap, fp, dist)));
+    // round to nearest tens
+    outputWriter("ISO " + Math.floor(calculateISO(gn, ap, fp, dist) / 10) * 10);
   } else {
     outputWriter("Unknown error occurred; please try again.");
     console.log("Unknown error occurred in calculate method.");
