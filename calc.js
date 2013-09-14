@@ -36,7 +36,7 @@ function control() {
   } else if ( !fp ) {
     outputWriter(calculateFlashPower(gn, ap, iso, dist));
   } else if ( !iso ) {
-    outputWriter(calculateISO(gn, ap, fp, dist));
+    outputWriter("ISO = " + Math.round(calculateISO(gn, ap, fp, dist)));
   } else {
     outputWriter("Unknown error occurred; please try again.");
     console.log("Unknown error occurred in calculate method.");
