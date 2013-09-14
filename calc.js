@@ -30,12 +30,16 @@ function control() {
     outputWriter("Error: please leave exactly one non-GN field blank.");
     return;
   } else if ( !ap ) {
-    outputWriter(calculateAperture(gn, iso, fp, dist));
+    // round to tenths
+    outputWriter("F/" + Math.round(calculateAperture(gn, iso, fp, dist) * 10) / 10);
   } else if ( !dist ) {
-    outputWriter(calculateDistance(gn, ap, iso, fp));
+    // round to nearest integer 
+    outputWriter(Math.round(calculateDistance(gn, ap, iso, fp)) + " ft.");
   } else if ( !fp ) {
-    outputWriter(calculateFlashPower(gn, ap, iso, dist));
+    // round to hundredths 
+    outputWriter("FP = " + Math.round(calculateFlashPower(gn, ap, iso, dist) * 100) / 100);
   } else if ( !iso ) {
+    // round to nearest integer
     outputWriter("ISO = " + Math.round(calculateISO(gn, ap, fp, dist)));
   } else {
     outputWriter("Unknown error occurred; please try again.");
